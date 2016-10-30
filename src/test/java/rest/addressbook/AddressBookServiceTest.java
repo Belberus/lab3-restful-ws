@@ -47,8 +47,6 @@ public class AddressBookServiceTest {
 		// Verify that GET /contacts is well implemented by the service, i.e
 		// test that it is safe and idempotent
 		//////////////////////////////////////////////////////////////////////
-		AddressBook  addressBook = response.readEntity(AddressBook.class);
-
 		// We check if the same request have the same response
 		Response responseTest = client.target("http://localhost:8282/contacts")
 				.request().get();	
@@ -56,7 +54,8 @@ public class AddressBookServiceTest {
 		// We check if both lists are the same. That means that the
 		// state has not changed.
 		AddressBook  addressBookTest = responseTest.readEntity(AddressBook.class);
-		assertEquals(addressBook.getPersonList().size(), addressBookTest.getPersonList().size());	
+		assertEquals(response.readEntity(AddressBook.class).getPersonList()
+				.size(), addressBookTest.getPersonList().size());	
 	}
 
 	@Test
