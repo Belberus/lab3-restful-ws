@@ -53,8 +53,8 @@ public class AddressBookServiceTest {
 		assertEquals(responseTest.getStatus(),response.getStatus());
 		// We check if both lists are the same. That means that the
 		// state has not changed.
-		asserEquals(response.readEntity(AddressBook.class).getPersonList()), 
-			responseTest.readEntity(AddressBook.class).getPersonList());	
+		asserEquals(response.readEntity(AddressBook.class).getPersonList(), 
+			responseTest.readEntity(AddressBook.class).getPersonList();	
 	}
 
 	@Test
