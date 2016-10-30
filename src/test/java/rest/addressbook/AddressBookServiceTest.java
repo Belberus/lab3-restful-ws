@@ -226,7 +226,7 @@ public class AddressBookServiceTest {
 		Response responseTest = client.target("http://localhost:8282/contacts")
 				.request(MediaType.APPLICATION_JSON)
 				.post(Entity.entity(testPerson, MediaType.APPLICATION_JSON));
-		assertEquals(201, responseCheck.getStatus());
+		assertEquals(201, responseTest.getStatus());
 		assertEquals(testPersonURI, responseTest.getLocation());
 
 		// We check if the post changes the server status
