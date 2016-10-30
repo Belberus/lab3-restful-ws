@@ -32,6 +32,7 @@ public class AddressBookServiceTest {
 	@Test
 	public void serviceIsAlive() throws IOException {
 		// Prepare server
+		
 		AddressBook ab = new AddressBook();
 		launchServer(ab);
 
@@ -40,16 +41,19 @@ public class AddressBookServiceTest {
 		Response response = client.target("http://localhost:8282/contacts")
 				.request().get();
 		assertEquals(200, response.getStatus());
-		assertEquals(0, response.readEntity(AddressBook.class).getPersonList()
+		AddressBook addressBook = response.readEntity(AddressBook.class);
+		assertEquals(0, addressBook.getPersonList()
 				.size());
 
 		//////////////////////////////////////////////////////////////////////
 		// Verify that GET /contacts is well implemented by the service, i.e
 		// test that it is safe and idempotent
 		//////////////////////////////////////////////////////////////////////
-		Response responseTest = client.target("http://localhost:8282/contacts").request().get();
-		assertEquals(response.getStatus(),responseTest.getStatus());
-		assertEquals(response.readEntity(AddressBook.class).getPersonList().size(),responseTest.readEntity(AddressBook.class).getPersonList().size());
+		
+		Response newResponse = client.target("http://localhost:8282/contacts").request().get();
+		assertEquals(response.getStatus(),newResponse.getStatus());
+		AddressBook newAddressBook = newResponse.readEntity(AddressBook.class);
+		assertEquals(addressBook.getPersonList().size(),newAddressBook.getPersonList().size());
 	}
 
 	@Test
