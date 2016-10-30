@@ -47,6 +47,9 @@ public class AddressBookServiceTest {
 		// Verify that GET /contacts is well implemented by the service, i.e
 		// test that it is safe and idempotent
 		//////////////////////////////////////////////////////////////////////
+		Response responseTest = client.target("http://localhost:8282/contacts").request().get();
+		assertEquals(response.getStatus(),responseTest.getStatus());
+		assertEquals(response.readEntity(AddressBook.class).getPersonList().size(),responseTest.readEntity(AddressBook.class).getPersonList().size());
 	}
 
 	@Test
