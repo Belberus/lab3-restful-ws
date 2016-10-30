@@ -55,7 +55,7 @@ public class AddressBookServiceTest {
 		// state has not changed.
 		AddressBook  addressBook = response.readEntity(AddressBook.class);
 		AddressBook  addressBookTest = responseTest.readEntity(AddressBook.class);
-		assertEquals(addressBook.getPersonList().size(), ddressBookTest.getPersonList().size());	
+		assertEquals(addressBook.getPersonList().size(), addressBookTest.getPersonList().size());	
 	}
 
 	@Test
