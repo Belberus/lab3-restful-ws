@@ -55,8 +55,7 @@ public class AddressBookServiceTest {
 		// state has not changed.
 		AddressBook  addressBook = response.readEntity(AddressBook.class);
 		AddressBook  addressBookTest = responseTest.readEntity(AddressBook.class);
-		assertEquals(addressBook.getPersonList().size(), 
-			addressBookTest.getPersonList().size());	
+		assertEquals(addressBook.getPersonList().size(), ddressBookTest.getPersonList().size());	
 	}
 
 	@Test
@@ -178,11 +177,11 @@ public class AddressBookServiceTest {
 		assertEquals(200, responseTest.getStatus());
 		Person testMaria = responseTest.readEntity(Person.class);
 		// We check if the name is correct
-		assertEquals(testMaria.getName(),maria.getName());
+		assertEquals(testMaria.getName(),mariaUpdated.getName());
 		// We check if the ID is correct
-		assertEquals(3,maria.getId());
+		assertEquals(3,mariaUpdated.getId());
 		// We check if the URI is correct
-		assertEquals(mariaURI, testMaria.getHref());
+		assertEquals(mariaUpdated.getHref(), testMaria.getHref());
 	}
 
 	@Test
