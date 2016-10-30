@@ -7,7 +7,6 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.net.URI;
-import java.util.List;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -52,10 +51,10 @@ public class AddressBookServiceTest {
 		Response responseTest = client.target("http://localhost:8282/contacts")
 				.request().get();	
 		assertEquals(responseTest.getStatus(),response.getStatus());
-		List<Person> listTest = responseTest.readEntity(AddressBook.class).getPersonList();
 		// We check if both lists are the same. That means that the
 		// state has not changed.
-		asserEquals(list,listTest);	
+		asserEquals(response.readEntity(AddressBook.class).getPersonList()), 
+			responseTest.readEntity(AddressBook.class).getPersonList());	
 	}
 
 	@Test
