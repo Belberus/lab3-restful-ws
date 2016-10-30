@@ -53,7 +53,7 @@ public class AddressBookServiceTest {
 		assertEquals(responseTest.getStatus(),response.getStatus());
 		// We check if both lists are the same. That means that the
 		// state has not changed.
-		asserEquals(response.readEntity(AddressBook.class).getPersonList(), 
+		assertEquals(response.readEntity(AddressBook.class).getPersonList(), 
 			responseTest.readEntity(AddressBook.class).getPersonList());	
 	}
 
@@ -114,7 +114,7 @@ public class AddressBookServiceTest {
 		Response responseTest = client.target("http://localhost:8282/contacts")
 				.request(MediaType.APPLICATION_JSON).get();
 		assertEquals(200,responseTest.getStatus());
-		asserEquals(2, responseTest.readEntity(AddressBook.class).getPersonList()
+		assertEquals(2, responseTest.readEntity(AddressBook.class).getPersonList()
 			.size());
 	}
 
@@ -173,14 +173,14 @@ public class AddressBookServiceTest {
 		
 		Response responseTest = client.target("http://localhost:8282/contacts/person/3")
 				.request(MediaType.APPLICATION_JSON).get();
-		asserEquals(200, responseGet.getStatus());
+		assertEquals(200, responseGet.getStatus());
 		Person testMaria = responseTest.readEntity(Person.class);
 		// We check if the name is correct
 		assertEquals(testMaria.getName(),maria.getName());
 		// We check if the ID is correct
 		assertEquals(3,maria.getId());
 		// We check if the URI is correct
-		asserEquals(mariaURI, testMaria.getHref());
+		assertEquals(mariaURI, testMaria.getHref());
 	}
 
 	@Test
@@ -235,8 +235,8 @@ public class AddressBookServiceTest {
 		responseTest = client.target("http://localhost:8282/contacts")
 				.request(MediaType.APPLICATION_JSON)
 				.post(Entity.entity(testPerson, MediaType.APPLICATION_JSON));
-		asserEquals(201, responseTest.getStatus());
-		asserEquals(testPerson2URI, responseTest.getLocation());
+		assertEquals(201, responseTest.getStatus());
+		assertEquals(testPerson2URI, responseTest.getLocation());
 	}
 
 	@Test
@@ -294,7 +294,7 @@ public class AddressBookServiceTest {
 		Response responseTest = client.target("http://localhost:8282/contacts/person/2")
 				.request(MediaType.APPLICATION_JSON)
 				.put(Entity.entity(maria, MediaType.APPLICATION_JSON));
-		asserEquals(200, responseTest.getStatus());
+		assertEquals(200, responseTest.getStatus());
 		assertEquals(MediaType.APPLICATION_JSON_TYPE, responseTest.getMediaType());
 
 		// This entity must have the same values that the first put response
