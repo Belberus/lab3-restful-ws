@@ -51,7 +51,7 @@ public class AddressBookServiceTest {
 		Response responseTest = client.target("http://localhost:8282/contacts")
 				.request().get();	
 		assertEquals(responseTest.getStatus(),response.getStatus());
-		List<Person> listTest = responseTest.readEntity(AddressBook.class)getPersonList();
+		List<Person> listTest = responseTest.readEntity(AddressBook.class).getPersonList();
 		// We check if both lists are the same. That means that the
 		// state has not changed.
 		asserEquals(list,listTest);	
@@ -213,9 +213,9 @@ public class AddressBookServiceTest {
 		// test that it is not safe and not idempotent
 		//////////////////////////////////////////////////////////////////////
 		// URI of the first person posted	
-		URI testPersonURI = URI.create("http://localhost:8282/contacts/person/1"));
+		URI testPersonURI = URI.create("http://localhost:8282/contacts/person/1");
 		// URI of the second person posted
-		URI testPerson2URI = URI.create("http://localhost:8282/contacts/person/2"));
+		URI testPerson2URI = URI.create("http://localhost:8282/contacts/person/2");
 		
 		// The first post creates the person and returns the URI of the new person
 		Response responseTest = client.target("http://localhost:8282/contacts")
