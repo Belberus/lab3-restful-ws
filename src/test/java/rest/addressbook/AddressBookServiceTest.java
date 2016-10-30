@@ -49,7 +49,7 @@ public class AddressBookServiceTest {
 		// Verify that GET /contacts is well implemented by the service, i.e
 		// test that it is safe and idempotent
 		//////////////////////////////////////////////////////////////////////
-		
+		// The request must have the same response than before
 		Response newResponse = client.target("http://localhost:8282/contacts").request().get();
 		assertEquals(response.getStatus(),newResponse.getStatus());
 		AddressBook newAddressBook = newResponse.readEntity(AddressBook.class);
@@ -211,10 +211,9 @@ public class AddressBookServiceTest {
 		// Verify that POST is well implemented by the service, i.e
 		// test that it is not safe and not idempotent
 		//////////////////////////////////////////////////////////////////////
-		// We create a person to test
+		// We create the person to test
 		Person testPerson = new Person();
 		testPerson.setName("Test");
-		ab.getPersonList().add(testPerson);
 
 		// URI of the first person posted	
 		URI testPersonURI = URI.create("http://localhost:8282/contacts/person/1");
