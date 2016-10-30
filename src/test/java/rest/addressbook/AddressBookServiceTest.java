@@ -173,7 +173,7 @@ public class AddressBookServiceTest {
 		
 		Response responseTest = client.target("http://localhost:8282/contacts/person/3")
 				.request(MediaType.APPLICATION_JSON).get();
-		assertEquals(200, responseGet.getStatus());
+		assertEquals(200, responseTest.getStatus());
 		Person testMaria = responseTest.readEntity(Person.class);
 		// We check if the name is correct
 		assertEquals(testMaria.getName(),maria.getName());
@@ -212,6 +212,11 @@ public class AddressBookServiceTest {
 		// Verify that POST is well implemented by the service, i.e
 		// test that it is not safe and not idempotent
 		//////////////////////////////////////////////////////////////////////
+		// We create a person to test
+		Person testPerson = new Person();
+		testPerson.setName("Test");
+		ab.getPersonList().add(testPerson);
+
 		// URI of the first person posted	
 		URI testPersonURI = URI.create("http://localhost:8282/contacts/person/1");
 		// URI of the second person posted
